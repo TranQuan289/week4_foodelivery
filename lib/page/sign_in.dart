@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:week4_food_delivery/bloc/app_bloc.dart';
 
+import 'home.dart';
+
 class SignIn extends StatelessWidget {
   const SignIn({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AppBloc, AppState>(
-      listener: (context, state) {},
+    return BlocBuilder<AppBloc, AppState>(
       builder: (context, state) {
         final bloc = context.read<AppBloc>();
         return Scaffold(
@@ -60,7 +61,7 @@ class SignIn extends StatelessWidget {
                       height: 20,
                     ),
                     TextField(
-                      controller: bloc.pass,
+                      controller: bloc.password,
                       keyboardType: TextInputType.emailAddress,
                       obscureText: true,
                       decoration: InputDecoration(
@@ -88,7 +89,18 @@ class SignIn extends StatelessWidget {
                                       side:
                                           const BorderSide(color: Colors.red))),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          bloc.add(AppSignIn(
+                              email: bloc.email.text,
+                              password: bloc.password.text));
+
+                          {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Home()));
+                          }
+                        },
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Text(

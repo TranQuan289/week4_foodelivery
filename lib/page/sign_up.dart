@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:week4_food_delivery/model/user.dart';
 
 import '../bloc/app_bloc.dart';
+import 'sign_in.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AppBloc, AppState>(
-      listener: (context, state) {},
+    return BlocBuilder<AppBloc, AppState>(
       builder: (context, state) {
         final bloc = context.read<AppBloc>();
         return Scaffold(
@@ -62,7 +61,7 @@ class SignUp extends StatelessWidget {
                       height: 20,
                     ),
                     TextField(
-                      controller: bloc.pass,
+                      controller: bloc.password,
                       obscureText: true,
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.only(
@@ -79,7 +78,7 @@ class SignUp extends StatelessWidget {
                       height: 20,
                     ),
                     TextField(
-                      controller: bloc.rePass,
+                      controller: bloc.rePassword,
                       obscureText: true,
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.only(
@@ -95,33 +94,43 @@ class SignUp extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              const Color(0xFFD35400)),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30),
-                                      side:
-                                          const BorderSide(color: Colors.red))),
-                        ),
-                        onPressed: () {
-                          if (bloc.pass.text == bloc.rePass.text) {
-                            var user = User(
-                                id: '1',
-                                email: bloc.email.text,
-                                password: bloc.pass.text);
-                            bloc.add(AppUserChanged(user));
-                          }
-                        },
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            "Sign Up",
-                            style: TextStyle(fontSize: 27),
+                    Builder(builder: (context) {
+                      return ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                const Color(0xFFD35400)),
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                    side: const BorderSide(color: Colors.red))),
                           ),
-                        )),
+                          onPressed: () {
+                            if (bloc.password.text == bloc.rePassword.text &&
+                                bloc.password.text.length >= 6) {
+                              bloc.add(AppSignUp(
+                                  email: bloc.email.text,
+                                  password: bloc.password.text));
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const SignIn()),
+                              );
+                            } else {
+                              Scaffold.of(context)
+                                  .showBottomSheet((context) => const Text(
+                                        "Mật khẩu phải lớn hơn 6 kí tự và trùng nhau",
+                                      ));
+                            }
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              "Sign Up",
+                              style: TextStyle(fontSize: 27),
+                            ),
+                          ));
+                    }),
                     const SizedBox(
                       height: 20,
                     ),

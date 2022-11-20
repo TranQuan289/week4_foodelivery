@@ -7,10 +7,22 @@ abstract class AppEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class AppLogoutRequested extends AppEvent {}
+class AppSignIn extends AppEvent {
+  final String email;
+  final String password;
 
-class AppUserChanged extends AppEvent {
-  final User user;
-
-  const AppUserChanged(this.user);
+  const AppSignIn({required this.email, required this.password});
 }
+
+class AppSignUp extends AppEvent {
+  final String email;
+  final String password;
+
+  const AppSignUp({required this.email, required this.password});
+}
+
+class AppLogout extends AppEvent {}
+
+class SignInSuccess extends AppEvent {}
+
+class SignInFail extends AppEvent {}
