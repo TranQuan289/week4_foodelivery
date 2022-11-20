@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "635425055766",
+    "project_id": "week4-fooddelivery",
+    "storage_bucket": "week4-fooddelivery.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635425055766:android:ffaeac03680064ab05c137",
+        "android_client_info": {
+          "package_name": "com.example.week4_food_delivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "635425055766-hcnf4inhmjisg4tjtk6dedsth82r4q27.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPNP95wt6B-3UGanibudB33dYdryxaorI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "635425055766-hcnf4inhmjisg4tjtk6dedsth82r4q27.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "635425055766-1rk03ua0fgaon2qf2graguls6bjfddrc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.week4FoodDelivery"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
