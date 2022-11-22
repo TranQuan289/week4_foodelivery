@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:week4_food_delivery/bloc/app_bloc.dart';
 import 'package:week4_food_delivery/page/sign_in_up.dart';
+
+import 'bloc/bloc/auth_bloc.dart';
+import 'data/repositories/auth_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,15 +13,16 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => AppBloc(),
-      child: const MaterialApp(
-        color: Colors.white,
-        home: SignInUp(),
+    return RepositoryProvider(
+      create: (context) => AuthRepository(),
+      child: BlocProvider(
+        create: (context) => AuthBloc(
+          authRepository: RepositoryProvider.of<AuthRepository>(context),
+        ),
+        child: const MaterialApp(home: SignInUp()),
       ),
     );
   }

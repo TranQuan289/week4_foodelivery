@@ -41,7 +41,7 @@ class SignInUp extends StatelessWidget {
                             side: const BorderSide(color: Colors.red))),
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const SignIn()));
@@ -66,7 +66,7 @@ class SignInUp extends StatelessWidget {
                             side: const BorderSide(color: Color(0xFFECF0F1)))),
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const SignUp()));
